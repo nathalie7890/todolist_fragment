@@ -1,6 +1,7 @@
 package com.nathalie.todolistfragments.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nathalie.todolistfragments.data.Model.Task
@@ -8,7 +9,9 @@ import com.nathalie.todolistfragments.databinding.ItemLayoutTaskBinding
 
 class TaskAdapter(
     private var items: List<Task>,
-    val onClick: (item: Task) -> Unit
+    val onClick: (item: Task) -> Unit,
+    val onLongClick: (item: Task) -> Unit,
+    val onMoreClick: (view: View, item: Task) -> Unit
 ) :
     RecyclerView.Adapter<TaskAdapter.ItemTaskHolder>() {
 
@@ -25,6 +28,15 @@ class TaskAdapter(
             tvDate.text = item.date
             cvTaskItem.setOnClickListener {
                 onClick(item)
+            }
+
+            cvTaskItem.setOnLongClickListener {
+                onLongClick(item)
+                return@setOnLongClickListener true
+            }
+
+            icMore.setOnClickListener {
+                onMoreClick(it, item)
             }
         }
     }

@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    android:padding="16dp"
     tools:context=".fragments.ui.DetailsBottomSheetFragment">
 
-    <View
-        android:layout_width="25dp"
-        android:layout_height="3dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@color/grey" />
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EAEAEA" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Title" />
+        <View
+            android:layout_width="25dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@color/grey" />
 
-    <TextView
-        android:id="@+id/tvDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Details" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EAEAEA" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Title" />
+
+        <TextView
+            android:id="@+id/tvDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Details" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="420dp"
+            android:layout_gravity="center"
+            android:src="@drawable/image1" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
