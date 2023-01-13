@@ -6,8 +6,8 @@ import com.nathalie.todolistfragments.data.Model.Task
 import com.nathalie.todolistfragments.data.Model.User
 
 
-@Database(entities = [Task::class, User::class], version =2)
-abstract class TodoListDatabase: RoomDatabase() {
+@Database(entities = [Task::class, User::class], version = 3)
+abstract class TodoListDatabase : RoomDatabase() {
     abstract val taskDao: TaskDao
 
     companion object {

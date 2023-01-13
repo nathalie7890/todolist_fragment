@@ -1,5 +1,6 @@
 package com.nathalie.todolistfragments.adapters
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,11 @@ class TaskAdapter(
             tvDate.text = item.date
             cvTaskItem.setOnClickListener {
                 onClick(item)
+            }
+
+            item.image?.let {bytes->
+                val bitmap = BitmapFactory.decodeByteArray(item.image, 0, bytes.size)
+                image.setImageBitmap(bitmap)
             }
 
             cvTaskItem.setOnLongClickListener {

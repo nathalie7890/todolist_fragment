@@ -10,35 +10,45 @@
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/Todo.Title"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            android:textSize="18sp" />
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_date"
-            style="@style/Todo.Body"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Date"
-            android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="64dp"
+                android:layout_height="80dp"
+                android:layout_margin="8dp"
+                android:layout_gravity="center"
+                android:minWidth="60dp" />
 
-        <ImageView
-            android:id="@+id/icMore"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="bottom|end"
-            android:src="@drawable/ic_more_vert" />
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/Todo.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="18sp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/Todo.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/icMore"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="bottom|end"
+                android:src="@drawable/ic_more_vert" />
+
+        </LinearLayout>
+
+
 
 </androidx.cardview.widget.CardView>
