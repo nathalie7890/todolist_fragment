@@ -2,6 +2,7 @@ package com.nathalie.todolistfragments
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -27,6 +28,12 @@ class MainActivity : AppCompatActivity() {
         val navigationView = findViewById<NavigationView>(R.id.navigationView)
         navigationView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val greeting = GreetingInpl()
+        greeting.greeting()
+
+        val list = mutableListOf<Int>(1, 2, 3, 4)
+        val res = list.add2(1,2)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -34,11 +41,22 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+fun MutableList<Int>.add2(a: Int, b: Int): Int {
+    return this[a] + this[b]
+}
+
 interface Greetings {
     fun greeting()
 }
 
-class BaseGreeting: Greetings {
+class BaseGreeting : Greetings {
     override fun greeting() {
+        Log.d("debugging", "Hello from kotlin delegation")
+    }
+
+    fun test() {
+        Log.d("debugging", "Hello from kotlin delegation")
     }
 }
+
+class GreetingInpl : Greetings by BaseGreeting()

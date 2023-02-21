@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
 
     fun setUpAdapter() {
         val layoutManager = GridLayoutManager(requireContext(), 2)
-        adapter = TaskAdapter(emptyList())
+        adapter = TaskAdapter(mutableListOf())
         adapter.listener = object : TaskAdapter.Listener {
             override fun onClick(task: Task) {
                 val action = HomeFragmentDirections.actionHomeToDetails(task.id!!)

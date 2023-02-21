@@ -5,12 +5,15 @@ import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nathalie.todolistfragments.data.Model.Task
 import com.nathalie.todolistfragments.databinding.ItemLayoutTaskBinding
+import com.nathalie.todolistfragments.utils.TaskDiffUtil
+import com.nathalie.todolistfragments.utils.update
 
 class TaskAdapter(
-    private var items: List<Task>,
+    private var items: MutableList<Task>,
 //    val onClick: (item: Task) -> Unit,
 //    val onLongClick: (item: Task) -> Unit,
 //    val onMoreClick: (view: View, item: Task) -> Unit
@@ -40,7 +43,7 @@ class TaskAdapter(
                 listener?.onClick(item)
             }
 
-            item.image?.let {bytes->
+            item.image?.let { bytes ->
                 val bitmap = BitmapFactory.decodeByteArray(item.image, 0, bytes.size)
                 image.setImageBitmap(bitmap)
             }
@@ -59,8 +62,12 @@ class TaskAdapter(
     override fun getItemCount() = items.size
 
     fun setTasks(items: List<Task>) {
-        this.items = items
-        notifyDataSetChanged()
+        val oldItems = this.items
+        this.items.clear()
+        this.items.addAll(items)
+        update(this.items, items) { task1, task2 ->
+            task1.id == task2.id
+        }
     }
 
     class ItemTaskHolder(val binding: ItemLayoutTaskBinding) :
