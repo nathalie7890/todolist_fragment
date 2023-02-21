@@ -33,3 +33,12 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onNavigateUp()
     }
 }
+
+interface Greetings {
+    fun greeting()
+}
+
+class BaseGreeting: Greetings {
+    override fun greeting() {
+    }
+}
