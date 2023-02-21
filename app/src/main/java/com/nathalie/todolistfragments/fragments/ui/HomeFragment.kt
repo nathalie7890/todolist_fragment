@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nathalie.todolistfragments.MyApplication
 import com.nathalie.todolistfragments.R
 import com.nathalie.todolistfragments.adapters.TaskAdapter
+import com.nathalie.todolistfragments.data.Model.Task
 import com.nathalie.todolistfragments.databinding.FragmentHomeBinding
 import com.nathalie.todolistfragments.viewModels.HomeViewModel
 import com.nathalie.todolistfragments.viewModels.MainViewModel
@@ -88,17 +89,19 @@ class HomeFragment : Fragment() {
 
     fun setUpAdapter() {
         val layoutManager = GridLayoutManager(requireContext(), 2)
-        adapter = TaskAdapter(
-            emptyList(),
-            {
-                val action = HomeFragmentDirections.actionHomeToDetails(it.id!!)
-                NavHostFragment.findNavController(this).navigate(action)
-            },
-            {
-                val detailsFragment = DetailsBottomSheetFragment(it)
+        adapter = TaskAdapter(emptyList())
+        adapter.listener = object : TaskAdapter.Listener {
+            override fun onClick(task: Task) {
+                val action = HomeFragmentDirections.actionHomeToDetails(task.id!!)
+                NavHostFragment.findNavController(this@HomeFragment).navigate(action)
+            }
+
+            override fun onLongClick(task: Task) {
+                val detailsFragment = DetailsBottomSheetFragment(task)
                 detailsFragment.show(childFragmentManager, "Child-Fragment")
-            },
-            { view, task ->
+            }
+
+            override fun onMoreClick(view: View, task: Task) {
                 val popupMenu = PopupMenu(requireContext(), view)
                 popupMenu.setOnMenuItemClickListener {
                     return@setOnMenuItemClickListener when (it.itemId) {
@@ -125,8 +128,8 @@ class HomeFragment : Fragment() {
                 popupMenu.setForceShowIcon(true)
                 popupMenu.show()
             }
-        )
 
+        }
         binding.rvItems.adapter = adapter
         binding.rvItems.layoutManager = layoutManager
     }

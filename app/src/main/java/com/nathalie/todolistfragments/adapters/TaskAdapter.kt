@@ -1,5 +1,6 @@
 package com.nathalie.todolistfragments.adapters
 
+import android.content.ClipData
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,13 @@ import com.nathalie.todolistfragments.databinding.ItemLayoutTaskBinding
 
 class TaskAdapter(
     private var items: List<Task>,
-    val onClick: (item: Task) -> Unit,
-    val onLongClick: (item: Task) -> Unit,
-    val onMoreClick: (view: View, item: Task) -> Unit
+//    val onClick: (item: Task) -> Unit,
+//    val onLongClick: (item: Task) -> Unit,
+//    val onMoreClick: (view: View, item: Task) -> Unit
 ) :
     RecyclerView.Adapter<TaskAdapter.ItemTaskHolder>() {
+
+    var listener: Listener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemTaskHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -27,8 +30,14 @@ class TaskAdapter(
         holder.binding.run {
             tvTitle.text = item.title
             tvDate.text = item.date
+//            cvTaskItem.setOnClickListener(object: View.OnClickListener {
+//                override fun onClick(v:View?) {
+//                    onClick(item)
+//                }
+//            })
+
             cvTaskItem.setOnClickListener {
-                onClick(item)
+                listener?.onClick(item)
             }
 
             item.image?.let {bytes->
@@ -37,12 +46,12 @@ class TaskAdapter(
             }
 
             cvTaskItem.setOnLongClickListener {
-                onLongClick(item)
+                listener?.onLongClick(item)
                 return@setOnLongClickListener true
             }
 
             icMore.setOnClickListener {
-                onMoreClick(it, item)
+                listener?.onMoreClick(it, item)
             }
         }
     }
@@ -56,4 +65,11 @@ class TaskAdapter(
 
     class ItemTaskHolder(val binding: ItemLayoutTaskBinding) :
         RecyclerView.ViewHolder(binding.root)
+
+    interface Listener {
+        fun onClick(task: Task)
+        fun onLongClick(task: Task)
+        fun onMoreClick(view: View, task: Task)
+
+    }
 }

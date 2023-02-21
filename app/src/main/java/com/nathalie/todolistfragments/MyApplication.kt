@@ -19,6 +19,7 @@ class MyApplication : Application() {
             TodoListDatabase.DATABASE_NAME
         )
             .fallbackToDestructiveMigration()
+            .addMigrations(TodoListDatabase.MIGRATION_1_2)
             .build()
 
         taskRepo = TaskRepository(todoListDatabase.taskDao)
