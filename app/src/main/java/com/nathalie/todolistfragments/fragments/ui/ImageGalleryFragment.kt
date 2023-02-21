@@ -50,7 +50,7 @@ class ImageGalleryFragment : Fragment() {
         }
 
 
-        adapter = ImageSliderAdapter(items)
+        adapter = ImageSliderAdapter(items.toMutableList())
 
         binding.vpImages.let { viewPager ->
             viewPager.adapter = adapter
